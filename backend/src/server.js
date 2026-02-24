@@ -19,5 +19,5 @@ app.get('/', async(req, res) => {
 });
 
 app.listen(PORT, '127.0.0.1', () => {
-    ({ message: `Express server is running on port ${PORT}` })
-})
+    console.log(`Express server is running on port ${PORT}`);
+});
