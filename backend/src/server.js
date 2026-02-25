@@ -27,11 +27,9 @@ app.use(cors());
 app.use(dbHealth); 
 
 app.get('/', async(req, res) => {
-    try {
-        res.status(200).json({ message: 'Express server is healthy.' });
-    } catch (error) {
-        res.status(200).json({ error: error.message });
-    }
+    res.status(200).json({ 
+        message: 'Express server is healthy. Postgres database is healthy.',
+    });
 });
 
 app.listen(PORT, '127.0.0.1', () => {
