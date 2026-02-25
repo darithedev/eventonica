@@ -59,6 +59,25 @@ app.post('/events', async (req, res) => {
     }
 });
 
+// Endpoint to update an event by id (updates the event completely)
+app.put('/events/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { event_name, category, date } = req.body;
+        
+        const result = await pool.query(
+            'UPDATE events SET event_name=$1, category=$2, date=$3 WHERE id=$4 RETURNING *',
+            [event_name, category, date, id]
+        );
+
+        if (result.rows.length === 0) return res.status(404).json({ error: 'This event does not exist!'});
+
+        res.status(201).json(result.rows[0])
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(PORT, '127.0.0.1', () => {
     console.log(`Express server is running on port ${PORT}`);
 });
