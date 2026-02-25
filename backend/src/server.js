@@ -78,6 +78,24 @@ app.put('/events/:id', async (req, res) => {
     }
 });
 
+// Endpoint to update event favorite toggle (true/false)
+app.patch('/events/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        const result = await pool.query(
+            'UPDATE events SET is_favorite = NOT is_Favorite WHERE id=$1 RETURNING *',
+            [id]
+        );
+
+        if (result.rows.length === 0) return res.status(404).json({ error: 'This event does not exist!'});
+
+        res.status(201).json(result.rows[0])
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(PORT, '127.0.0.1', () => {
     console.log(`Express server is running on port ${PORT}`);
 });
