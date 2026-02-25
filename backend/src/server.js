@@ -42,6 +42,23 @@ app.get('/events', async (req, res) => {
     }
 });
 
+// Route to create new event and add to local PostgreSQL eventonica db
+app.post('/events', async (req, res) => {
+    try {
+        const { id, event_name, category, date, is_favorite } = req.body;
+
+        const result = await pool.query(
+            `INSERT INTO events (event_name, category, date, is_favorite) 
+             VALUES ($1, $2, $3, $4) 
+             RETURNING *`,
+            [event_name, category, date, is_favorite]
+        );
+        res.status(201).json(result.rows[0]);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(PORT, '127.0.0.1', () => {
     console.log(`Express server is running on port ${PORT}`);
 });
