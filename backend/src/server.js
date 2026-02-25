@@ -32,6 +32,16 @@ app.get('/', async(req, res) => {
     });
 });
 
+// Route that gets all events in local PostgreSQL eventonica database
+app.get('/events', async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM events');
+        res.status(200).json(result.rows);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 app.listen(PORT, '127.0.0.1', () => {
     console.log(`Express server is running on port ${PORT}`);
 });
