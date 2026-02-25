@@ -13,7 +13,7 @@ const dbHealth = async (req, res, next) => {
         await pool.query('SELECT 1');
         next();
     } catch (error) {
-        return res.status(503).json({ 
+        res.status(503).json({ 
             message: 'Express server is healthy. Postgres database is down.',
             server: 'up', 
             database: 'down',
@@ -43,7 +43,7 @@ app.get('/events', async (req, res) => {
 });
 
 // Route to create new event and add to local PostgreSQL eventonica db
-app.post('/events', async (req, res) => {
+app.post('/event', async (req, res) => {
     try {
         const { id, event_name, category, date, is_favorite } = req.body;
 
@@ -60,7 +60,7 @@ app.post('/events', async (req, res) => {
 });
 
 // Endpoint to update an event by id (updates the event completely)
-app.put('/events/:id', async (req, res) => {
+app.put('/event/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { event_name, category, date } = req.body;
@@ -79,7 +79,7 @@ app.put('/events/:id', async (req, res) => {
 });
 
 // Endpoint to update event favorite toggle (true/false)
-app.patch('/events/:id', async (req, res) => {
+app.patch('/event/:id', async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -97,7 +97,7 @@ app.patch('/events/:id', async (req, res) => {
 });
 
 // Endpoint to delete an event
-app.delete('/events/:id', async (req, res) => {
+app.delete('/event/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
