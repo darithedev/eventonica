@@ -14,7 +14,7 @@ const dbHealth = async (req, res, next) => {
         next();
     } catch (error) {
         res.status(503).json({ 
-            message: 'Express server is healthy. Postgres database is down.',
+            message: 'Express server is healthy. Postgres database connection is down.',
             server: 'up', 
             database: 'down',
             error: error.message 
@@ -28,7 +28,7 @@ app.use(dbHealth);
 
 app.get('/', async(req, res) => {
     res.status(200).json({ 
-        message: 'Express server is healthy. Postgres database is healthy.',
+        message: 'Express server is healthy. Postgres database connection is healthy.',
     });
 });
 
