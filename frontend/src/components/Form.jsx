@@ -10,6 +10,11 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
       is_favorite: false,
     }
   );
+
+   const handleEventNameChange = (event) => {
+    const name = event.target.value;
+    setEvent((eventName) => ({ ...eventName, name }));
+  };
 }
 
   return (
