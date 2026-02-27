@@ -56,6 +56,22 @@ const ListEvents = () => {
 
     };
 
+    const filterForEvents = events.filter((event) => {
+        const q = query.toLowerCase();
+
+        if (search === "all"){
+            return true;
+        } else if (search === "event_name") {
+            return event.event_name.toLowerCase().includes(q);
+        } else if (search === "category") {
+            return event.category.toLowerCase().includes(q);
+        } else if (search === "date") {
+            const d = new Date(event.date);
+            const month = d.toLocaleDateString("en-US", { month: "long" }).toLowerCase();
+            return month.includes(q);
+        }
+    });
+
     return (
         <div className="mybody">
             {(isNewEvent || editingEvent)
