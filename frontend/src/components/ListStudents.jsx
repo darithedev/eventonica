@@ -6,6 +6,13 @@ import Event from "./Event.jsx";
 const ListEvents = () => {
     const [events, setEvents] = useState([]);
     const [editingEvent, setEditingEvent] = useState(null);
+    const loadEvents = () => {
+      fetch("http://localhost:8080/api/events")
+        .then((response) => response.json())
+        .then((events) => {
+          setEvents(events);
+        });
+    };
 
     return (
         <div className="mybody">
