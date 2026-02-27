@@ -14,6 +14,10 @@ const ListEvents = () => {
         });
     };
 
+    useEffect(() => {
+        loadEvents();
+    }, [events]);
+
     return (
         <div className="mybody">
 
