@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import * as ioicons from "react-icons/io5";
 
-const Event = ({ event, toUpdate, toDelete }) => {
+const Event = ({ event, toUpdate, toDelete, onEdit }) => {
     const onUpdate = (toUpdateEvent) => {
         toUpdate(toUpdateEvent);
     }
@@ -12,16 +12,41 @@ const Event = ({ event, toUpdate, toDelete }) => {
         toDelete(toDeleteEvent);
     }
 
+    const patchFavorite = (isFavorite) => {
+    return fetch(`http://localhost:8080/api/event/${isFavorite.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(isFavorite)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        toUpdate(data);
+      });
+  };
+
+  const handleFavoriteToggle = () => {
+    const is_favorite = {
+        ...event,
+         is_favorite: !event.is_favorite
+    };
+
+    patchFavorite(is_favorite);
+  };
+
     return (
         <Card>
             <Card.Body>
                 <Card.Title>
                     {event.event_name}
-                    {event.is_favorite 
-                        ? (<ioicons.IoHeartOutline/>) 
-                        : (<ioicons.IoHeartSharp/>)
-                    }
                 </Card.Title>
+                <Button onClick={() => handleFavoriteToggle()}>
+                    {event.is_favorite 
+                        ? (<ioicons.IoHeartSharp/>) 
+                        : (<ioicons.IoHeartOutline/>)
+                    }
+                </Button>
                 <Card.Text>
                     {new Date(event.date).toLocaleString("en-US", {
                         dateStyle: "full",
@@ -40,9 +65,7 @@ const Event = ({ event, toUpdate, toDelete }) => {
                 </Button>
                 <Button
                     variant="outline-info"
-                    onClick={()=> {
-                        onUpdate(event);
-                    }}
+                    onClick={onEdit}
                     style={{ padding: "0.6em" }}
                 >
                     {" "}
