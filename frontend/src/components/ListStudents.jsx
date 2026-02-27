@@ -18,6 +18,28 @@ const ListEvents = () => {
         loadEvents();
     }, [events]);
 
+    const onSaveEvent = (newEvent) => {
+      setEvents((events) => [...events, newEvent]);
+    };
+
+    const updateEvent = () => {
+      loadEvents();
+    };
+
+    const onDelete = (event) => {
+        return fetch(`http://localhost:8080/api/event/${event.id}`, {
+            method: "DELETE"
+        }).then((response) => {
+            if (response.ok) {
+                loadEvents();
+            }
+        });
+    };
+
+    const onUpdate = (toUpdateEvent) => {
+        setEditingEvent(toUpdateEvent);
+    };
+
     return (
         <div className="mybody">
 
