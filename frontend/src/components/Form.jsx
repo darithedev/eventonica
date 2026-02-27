@@ -49,6 +49,21 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
         clearForm();
       });
   };
+
+  const putEvent = (toEditEvent) => {
+    return fetch(`http://localhost:8080/api/students/${toEditEvent.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(toEditEvent)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        onUpdateEvent(data);
+        clearForm();
+      });
+  };
 }
 
   return (
