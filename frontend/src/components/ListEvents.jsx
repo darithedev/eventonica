@@ -1,7 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import * as ioicons from "react-icons/io5";
 import EventForm from "./Form.jsx";
 import Event from "./Event.jsx";
+
+function reducer(state, action) {
+    if (action.type === 'updated_field') {
+        return {
+            ...state,
+            search: action.search
+        };
+    }
+    if (action.type === 'updated_query') {
+        return {
+            ...state,
+            query: action.query
+        };
+    }
+    if (action.type === 'all_events') {
+        return {
+            search: 'all',
+            query: ''
+        };
+    }
+
+    throw Error('Unknown action.');
+}
 
 const ListEvents = () => {
     const [events, setEvents] = useState([]);
@@ -21,9 +44,11 @@ const ListEvents = () => {
         { value: "category", label: "Category" },
         { value: "date", label: "Date (Month)" }
     ];
-    const [search, setSearch] = useState("all");
-    const [query, setQuery] = useState("");
     
+    const [state, dispatch] = useReducer(reducer, {
+        search: 'all',
+        query: ''
+    });
 
     useEffect(() => {
         loadEvents();
@@ -57,15 +82,15 @@ const ListEvents = () => {
     };
 
     const filterForEvents = events.filter((event) => {
-        const q = query.toLowerCase();
+        const q = state.query.toLowerCase();
 
-        if (search === "all"){
+        if (state.search === "all"){
             return true;
-        } else if (search === "event_name") {
+        } else if (state.search === "event_name") {
             return event.event_name.toLowerCase().includes(q);
-        } else if (search === "category") {
+        } else if (state.search === "category") {
             return event.category.toLowerCase().includes(q);
-        } else if (search === "date") {
+        } else if (state.search === "date") {
             const d = new Date(event.date);
             const month = d.toLocaleDateString("en-US", { month: "long" }).toLowerCase();
             return month.includes(q);
@@ -88,8 +113,13 @@ const ListEvents = () => {
                         <div>
                             <label>Search </label>
                             <select
-                                value={search}
-                                onChange={(event) => setSearch(event.target.value)}
+                                value={state.search}
+                                onChange={(event) => {
+                                    dispatch({
+                                        type: 'updated_field',
+                                        search: event.target.value
+                                    });
+                                }}
                             >
                                 {searchOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -100,8 +130,13 @@ const ListEvents = () => {
                             <input
                                 type="text"
                                 placeholder="What event are you searching for?"
-                                value={query}
-                                onChange={(event) => setQuery(event.target.value)}
+                                value={state.query}
+                                onChange={(event) => {
+                                    dispatch({
+                                        type: 'updated_query',
+                                        query: event.target.value
+                                    });
+                                }}
                             />
                         </div>
                         <button onClick={() => setIsNewEvent(true)}>Add Event</button>
