@@ -8,11 +8,11 @@ const Event = ({ event, toUpdate, toDelete }) => {
         toUpdate(toUpdateEvent);
     }
 
-  return (
-    <Card>
-      
-    </Card>
-  );
+    return (
+        <Card>
+        
+        </Card>
+    );
 };
 
 export default Event;
