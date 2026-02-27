@@ -102,6 +102,50 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
       onSubmit={handleSubmit}
     >
 
+      <Form.Group>
+        <Form.Label>Event Name</Form.Label>
+        <input
+          type="text"
+          id="add-event-name"
+          placeholder="An Example Event"
+          required
+          value={event.event_name}
+          onChange={handleEventNameChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Category</Form.Label>
+        <input
+          type="text"
+          id="add-event-category"
+          placeholder="Example"
+          required
+          value={event.category}
+          onChange={handleCategoryNameChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Set Event Date and Time</Form.Label>
+        <Form.Control
+          type="datetime-local"
+          required
+          value={event.date}
+          onChange={handleDateTimeChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Button type="submit" variant="outline-success">
+          {event.id ? "Edit Event" : "Add Event"}
+        </Button>
+        {event.id ? (
+          <Button type="button" variant="outline-warning" onClick={clearForm}>
+            Cancel
+          </Button>
+        ) : null}
+      </Form.Group>
     </Form>
   )
 }
