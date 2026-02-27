@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
-import * as ioicons from "react-icons/io5";
+import { useState, useEffect, useReducer } from "react";
 import EventForm from "./Form.jsx";
 import Event from "./Event.jsx";
 
@@ -74,11 +73,6 @@ const ListEvents = () => {
                 loadEvents();
             }
         });
-    };
-
-    const onUpdate = (toUpdateEvent) => {
-        setEditingEvent(toUpdateEvent);
-
     };
 
     const filterForEvents = events.filter((event) => {
