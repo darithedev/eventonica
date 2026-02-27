@@ -14,7 +14,41 @@ const Event = ({ event, toUpdate, toDelete }) => {
 
     return (
         <Card>
-        
+            <Card.Body>
+                <Card.Title>
+                    {event.event_name}
+                    {event.is_favorite 
+                        ? (<ioicons.IoHeartOutline/>) 
+                        : (<ioicons.IoHeartSharp/>)
+                    }
+                </Card.Title>
+                <Card.Text>
+                    {new Date(event.date).toLocaleString("en-US", {
+                        dateStyle: "full",
+                        timeStyle: "long"
+                    })}
+                </Card.Text>
+                <Card.Text>#{event.category}</Card.Text>
+                <Button
+                    variant="outline-danger"
+                    onClick={()=> {
+                        onDelete(event);
+                    }}
+                    style={{ padding: "0.6em", marginRight: "0.9em" }}
+                >
+                    <ioicons.IoTrash />
+                </Button>
+                <Button
+                    variant="outline-info"
+                    onClick={()=> {
+                        onUpdate(event);
+                    }}
+                    style={{ padding: "0.6em" }}
+                >
+                    {" "}
+                    <ioicons.IoSync />
+                </Button>
+            </Card.Body>
         </Card>
     );
 };
