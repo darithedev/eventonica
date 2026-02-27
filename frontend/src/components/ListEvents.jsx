@@ -85,9 +85,28 @@ const ListEvents = () => {
                 />
                 ) : (<div className="list-events">
                         <h2>Eventonica Events</h2>
+                        <div>
+                            <label>Search </label>
+                            <select
+                                value={search}
+                                onChange={(event) => setSearch(event.target.value)}
+                            >
+                                {searchOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                            <input
+                                type="text"
+                                placeholder="What event are you searching for?"
+                                value={query}
+                                onChange={(event) => setQuery(event.target.value)}
+                            />
+                        </div>
                         <button onClick={() => setIsNewEvent(true)}>Add Event</button>
                         <ul>
-                            {events.map((event) => {
+                            {filterForEvents.map((event) => {
                                 return (
                                 <li key={event.id}>
                                     {" "}
