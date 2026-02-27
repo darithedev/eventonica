@@ -28,12 +28,26 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
 
   const handleFavoriteToggle = (event) => {
     const is_favorite = event.target.checked;
-    //console.log(iscurrent);
     setEvent((favorite) => ({ ...favorite, is_favorite }));
   };
 
   const clearForm = () => {
     setEvent({ event_name: "", category: "", date: "", is_favorite: false, });
+  };
+
+  const postEvent = (newEvent) => {
+    return fetch("http://localhost:8080/api/events", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newEvent)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        onSaveEvent(data);
+        clearForm();
+      });
   };
 }
 
