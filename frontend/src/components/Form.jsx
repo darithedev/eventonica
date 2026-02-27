@@ -11,7 +11,10 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
     }
   );
 
-   const handleEventNameChange = (event) => {
+  // Handles put or patch requests
+  const [method, setMethod] = useState("none");
+
+  const handleEventNameChange = (event) => {
     const name = event.target.value;
     setEvent((eventName) => ({ ...eventName, name }));
   };
@@ -51,6 +54,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const putEvent = (toEditEvent) => {
+    setHandle("put");
     return fetch(`http://localhost:8080/api/event/${toEditEvent.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -66,6 +70,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const patchFavorite = (isFavorite) => {
+    setHandle("patch");
     return fetch(`http://localhost:8080/api/event/${isFavorite.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -78,6 +83,17 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
         onUpdateEvent(data);
         clearForm();
       });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (event.id) {
+      if (method === "patch") {
+        patchFavorite(event);
+      } else putEvent(event);
+    } else {
+      postEvent(event);
+    }
   };
 }
 
