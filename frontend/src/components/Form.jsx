@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+import dateFormat from '../helpers/dateFormat.js'
 
-const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
+const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent, setIsNewEvent, setEditingEvent }) => {
   const [event, setEvent] = useState(
     editingEvent || {
       event_name: "",
@@ -46,7 +47,6 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const putEvent = (toEditEvent) => {
-    setMethod("put");
     return fetch(`http://localhost:8080/api/event/${toEditEvent.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -68,6 +68,8 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
     } else {
       postEvent(event);
     }
+    setIsNewEvent(false);
+    setEditingEvent(null);
   };
 
   return (
@@ -105,7 +107,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
         <Form.Control
           type="datetime-local"
           required
-          value={event.date}
+          value={dateFormat(event.date)}
           onChange={handleDateTimeChange}
         />
       </Form.Group>
