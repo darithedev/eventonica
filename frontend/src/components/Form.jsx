@@ -15,6 +15,22 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
     const name = event.target.value;
     setEvent((eventName) => ({ ...eventName, name }));
   };
+
+  const handleCategoryNameChange = (event) => {
+    const name = event.target.value;
+    setEvent((categoryName) => ({ ...categoryName, name }));
+  };
+
+  const handleDateTimeChange = (event) => {
+    const dateTime = event.target.value;
+    setEvent((dt) => ({ ...dt, dateTime }));
+  };
+
+  const handleFavoriteToggle = (event) => {
+    const is_favorite = event.target.checked;
+    //console.log(iscurrent);
+    setStudent((favorite) => ({ ...favorite, is_favorite }));
+  };
 }
 
   return (
