@@ -4,6 +4,8 @@ import EventForm from "./Form.jsx";
 import Event from "./Event.jsx";
 
 const ListEvents = () => {
+    const [events, setEvents] = useState([]);
+    const [editingEvent, setEditingEvent] = useState(null);
 
     return (
         <div className="mybody">
