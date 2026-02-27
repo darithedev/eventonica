@@ -15,18 +15,18 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   const [method, setMethod] = useState("none");
 
   const handleEventNameChange = (event) => {
-    const name = event.target.value;
-    setEvent((eventName) => ({ ...eventName, name }));
+    const event_name = event.target.value;
+    setEvent((eventName) => ({ ...eventName, event_name }));
   };
 
   const handleCategoryNameChange = (event) => {
-    const name = event.target.value;
-    setEvent((categoryName) => ({ ...categoryName, name }));
+    const category = event.target.value;
+    setEvent((categoryName) => ({ ...categoryName, category }));
   };
 
   const handleDateTimeChange = (event) => {
-    const dateTime = event.target.value;
-    setEvent((dt) => ({ ...dt, dateTime }));
+    const date = event.target.value;
+    setEvent((dt) => ({ ...dt, date }));
   };
 
   const handleFavoriteToggle = (event) => {
@@ -54,7 +54,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const putEvent = (toEditEvent) => {
-    setHandle("put");
+    setMethod("put");
     return fetch(`http://localhost:8080/api/event/${toEditEvent.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -70,7 +70,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const patchFavorite = (isFavorite) => {
-    setHandle("patch");
+    setMethod("patch");
     return fetch(`http://localhost:8080/api/event/${isFavorite.id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -95,7 +95,6 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
       postEvent(event);
     }
   };
-}
 
   return (
     <Form 
@@ -105,5 +104,6 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
 
     </Form>
   )
+}
 
 export default EventForm;
