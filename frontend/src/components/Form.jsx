@@ -29,7 +29,11 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   const handleFavoriteToggle = (event) => {
     const is_favorite = event.target.checked;
     //console.log(iscurrent);
-    setStudent((favorite) => ({ ...favorite, is_favorite }));
+    setEvent((favorite) => ({ ...favorite, is_favorite }));
+  };
+
+  const clearForm = () => {
+    setEvent({ event_name: "", category: "", date: "", is_favorite: false, });
   };
 }
 
