@@ -42,7 +42,24 @@ const ListEvents = () => {
 
     return (
         <div className="mybody">
-
+            <div className="list-events">
+                <h2>Eventonica Events</h2>
+                <ul>
+                    {events.map((event) => {
+                        return (
+                        <li key={event.id}>
+                            {" "}
+                            <Event
+                                event={event}
+                                toDelete={onDelete}
+                                toUpdate={onUpdate}
+                            />
+                        </li>
+                        );
+                    })}
+                </ul>
+            </div>
+            
         </div>
     );
 };
