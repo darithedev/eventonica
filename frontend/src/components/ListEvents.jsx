@@ -15,6 +15,16 @@ const ListEvents = () => {
     };
     const [isNewEvent, setIsNewEvent] = useState(false);
 
+    const searchOptions = [
+        { value: "all", label: "All Events" },
+        { value: "event_name", label: "Event Name" },
+        { value: "category", label: "Category" },
+        { value: "date", label: "Date (Month)" }
+    ];
+    const [search, setSearch] = useState("all");
+    const [query, setQuery] = useState("");
+    
+
     useEffect(() => {
         loadEvents();
     }, []);
