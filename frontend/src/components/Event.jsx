@@ -8,6 +8,10 @@ const Event = ({ event, toUpdate, toDelete }) => {
         toUpdate(toUpdateEvent);
     }
 
+    const onDelete = (toDeleteEvent) => {
+        toDelete(toDeleteEvent);
+    }
+
     return (
         <Card>
         
