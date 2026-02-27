@@ -59,7 +59,12 @@ const ListEvents = () => {
                     })}
                 </ul>
             </div>
-            
+            <Form
+                key={editingEvent ? editingEvent.id : null}
+                onSaveEvent={onSaveEvent}
+                editingEvent={editingEvent}
+                onUpdateEvent={updateEvent}
+            />
         </div>
     );
 };
