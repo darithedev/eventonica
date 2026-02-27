@@ -29,6 +29,8 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent, setIsNewEvent, se
 
   const clearForm = () => {
     setEvent({ event_name: "", category: "", date: "", is_favorite: false, });
+    setIsNewEvent(false);
+    setEditingEvent(null);
   };
 
   const postEvent = (newEvent) => {
