@@ -11,9 +11,6 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
     }
   );
 
-  // Handles put or patch requests
-  const [method, setMethod] = useState("none");
-
   const handleEventNameChange = (event) => {
     const event_name = event.target.value;
     setEvent((eventName) => ({ ...eventName, event_name }));
@@ -27,11 +24,6 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   const handleDateTimeChange = (event) => {
     const date = event.target.value;
     setEvent((dt) => ({ ...dt, date }));
-  };
-
-  const handleFavoriteToggle = (event) => {
-    const is_favorite = event.target.checked;
-    setEvent((favorite) => ({ ...favorite, is_favorite }));
   };
 
   const clearForm = () => {
@@ -69,28 +61,10 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
       });
   };
 
-  const patchFavorite = (isFavorite) => {
-    setMethod("patch");
-    return fetch(`http://localhost:8080/api/event/${isFavorite.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(isFavorite)
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        onUpdateEvent(data);
-        clearForm();
-      });
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (event.id) {
-      if (method === "patch") {
-        patchFavorite(event);
-      } else putEvent(event);
+      putEvent(event);
     } else {
       postEvent(event);
     }
