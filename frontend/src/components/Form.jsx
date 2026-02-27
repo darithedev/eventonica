@@ -36,7 +36,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const postEvent = (newEvent) => {
-    return fetch("http://localhost:8080/api/events", {
+    return fetch("http://localhost:8080/api/event", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newEvent)
@@ -51,10 +51,25 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   };
 
   const putEvent = (toEditEvent) => {
-    return fetch(`http://localhost:8080/api/students/${toEditEvent.id}`, {
+    return fetch(`http://localhost:8080/api/event/${toEditEvent.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(toEditEvent)
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        onUpdateEvent(data);
+        clearForm();
+      });
+  };
+
+  const patchFavorite = (isFavorite) => {
+    return fetch(`http://localhost:8080/api/event/${isFavorite.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(isFavorite)
     })
       .then((response) => {
         return response.json();
