@@ -100,7 +100,7 @@ const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent }) => {
   return (
     <Form 
       className="form-event"
-      onSubmit="handleSubmit"
+      onSubmit={handleSubmit}
     >
 
     </Form>
