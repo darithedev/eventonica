@@ -14,7 +14,7 @@ const dbHealth = async (req, res, next) => {
         next();
     } catch (error) {
         res.status(503).json({ 
-            message: 'Express server is healthy. Postgres database is down.',
+            message: 'Express server is healthy. Postgres database connection is down.',
             server: 'up', 
             database: 'down',
             error: error.message 
@@ -28,12 +28,12 @@ app.use(dbHealth);
 
 app.get('/', async(req, res) => {
     res.status(200).json({ 
-        message: 'Express server is healthy. Postgres database is healthy.',
+        message: 'Express server is healthy. Postgres database connection is healthy.',
     });
 });
 
 // Route that gets all events in local PostgreSQL eventonica database
-app.get('/events', async (req, res) => {
+app.get('/api/events', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM events');
         res.status(200).json(result.rows);
@@ -43,7 +43,7 @@ app.get('/events', async (req, res) => {
 });
 
 // Route to create new event and add to local PostgreSQL eventonica db
-app.post('/event', async (req, res) => {
+app.post('/api/event', async (req, res) => {
     try {
         const { id, event_name, category, date, is_favorite } = req.body;
 
@@ -60,7 +60,7 @@ app.post('/event', async (req, res) => {
 });
 
 // Endpoint to update an event by id (updates the event completely)
-app.put('/event/:id', async (req, res) => {
+app.put('/api/event/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { event_name, category, date } = req.body;
@@ -79,7 +79,7 @@ app.put('/event/:id', async (req, res) => {
 });
 
 // Endpoint to update event favorite toggle (true/false)
-app.patch('/event/:id', async (req, res) => {
+app.patch('/api/event/:id', async (req, res) => {
     try {
         const { id } = req.params;
         
@@ -97,7 +97,7 @@ app.patch('/event/:id', async (req, res) => {
 });
 
 // Endpoint to delete an event
-app.delete('/event/:id', async (req, res) => {
+app.delete('/api/event/:id', async (req, res) => {
     try {
         const { id } = req.params;
 
