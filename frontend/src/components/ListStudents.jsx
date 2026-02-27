@@ -5,11 +5,11 @@ import Event from "./Event.jsx";
 
 const ListEvents = () => {
 
-  return (
-    <div className="mybody">
+    return (
+        <div className="mybody">
 
-    </div>
-  );
+        </div>
+    );
 };
 
 export default ListEvents;
