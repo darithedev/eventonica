@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import * as ioicons from "react-icons/io5";
 
-const Student = ({ event, toUpdate, toDelete }) => {
+const Event = ({ event, toUpdate, toDelete }) => {
 
   return (
     <Card>
@@ -12,4 +12,4 @@ const Student = ({ event, toUpdate, toDelete }) => {
   );
 };
 
-export default Student;
+export default Event;
