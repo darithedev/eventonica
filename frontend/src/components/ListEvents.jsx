@@ -134,7 +134,9 @@ const ListEvents = () => {
                             />
                         </div>
                         <button onClick={() => setIsNewEvent(true)}>Add Event</button>
-                        <ul>
+                        <ul
+                            style={{ listStyle: "none" }}
+                        >
                             {filterForEvents.map((event) => {
                                 return (
                                 <li key={event.id}>
