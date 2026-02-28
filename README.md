@@ -4,6 +4,9 @@ This project demonstrates an Event Management Web App connecting a React + Vite 
 
 <img width="515" height="414" alt="Photo of project demo" src="./frontend/src/assets/project-demo-updated.png" />
 
+## Project Data Model
+
+<img width="415" height="414" alt="Photo of project demo" src="./frontend/src/assets/data-model.png" />
 
 ## How to run
 
