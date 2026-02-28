@@ -1,0 +1,38 @@
+.mini-nav {
+    background-color: aquamarine;
+    margin: 30px;
+    padding: 15px;
+    border-radius: 15px;
+    font-size: large;
+    font-weight: bold;
+}
+.events-card {
+    background-color: aquamarine;
+    border-bottom: solid black 5px;
+    border-radius: 15px;
+    padding: 30px;
+}
+
+#dropdown {
+    background-color: #FEF3C7;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    margin-left: 7px;
+}
+
+#search-box {
+    background-color: #FEF3C7;
+    border: none;
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 10px;
+    margin-left: 7px;
+    width: 350px;
+}
+
+#add-button {
+    background-color: #115466;
+    color: #FEF3C7;
+    font-weight: bold;
+}
