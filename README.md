@@ -2,7 +2,7 @@
 
 This project demonstrates an Event Management Web App connecting a React + Vite frontend, Express + Node.js backend, and a PostgreSQL database. This project has five routes that implements the CRUD framework.
 
-<img width="515" height="414" alt="Photo of project demo" src="./frontend/src/assets/project-demo.png" />
+<img width="515" height="414" alt="Photo of project demo" src="./frontend/src/assets/project-demo-updated.png" />
 
 
 ## How to run
