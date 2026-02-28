@@ -7,7 +7,7 @@ This project demonstrates an Event Management Web App connecting a React + Vite 
 
 ## How to run
 
-1. Clone [trivia-game](https://github.com/darithedev/eventonica)
+1. Clone [eventonica](https://github.com/darithedev/eventonica)
 
 ### Database
 
