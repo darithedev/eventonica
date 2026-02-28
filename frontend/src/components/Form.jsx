@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import dateFormat from '../helpers/dateFormat.js'
+import '../components/Form.css'
 
 const EventForm = ({ onSaveEvent, editingEvent, onUpdateEvent, setIsNewEvent, setEditingEvent }) => {
   const [event, setEvent] = useState(
