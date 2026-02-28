@@ -1,6 +1,7 @@
 import { useState, useEffect, useReducer } from "react";
 import EventForm from "./Form.jsx";
 import Event from "./Event.jsx";
+import '../components/ListEvents.css'
 
 function reducer(state, action) {
     if (action.type === 'updated_field') {
@@ -104,9 +105,10 @@ const ListEvents = () => {
                 />
                 ) : (<div className="list-events">
                         <h2>Eventonica Events</h2>
-                        <div>
+                        <div className="mini-nav">
                             <label>Search </label>
                             <select
+                                id="dropdown"
                                 value={state.search}
                                 onChange={(event) => {
                                     dispatch({
@@ -119,9 +121,9 @@ const ListEvents = () => {
                                     <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>
-                                ))}
+                                ))} 
                             </select>
-                            <input
+                            <input id="search-box"
                                 type="text"
                                 placeholder="What event are you searching for?"
                                 value={state.query}
@@ -133,13 +135,13 @@ const ListEvents = () => {
                                 }}
                             />
                         </div>
-                        <button onClick={() => setIsNewEvent(true)}>Add Event</button>
+                        <button id="add-button" onClick={() => setIsNewEvent(true)}>Add Event</button>
                         <ul
                             style={{ listStyle: "none" }}
                         >
                             {filterForEvents.map((event) => {
                                 return (
-                                <li key={event.id}>
+                                <li className="events-card" key={event.id}>
                                     {" "}
                                     <Event
                                         event={event}
