@@ -35,7 +35,7 @@ app.get('/', async(req, res) => {
 // Route that gets all events in local PostgreSQL eventonica database
 app.get('/api/events', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM events');
+        const result = await pool.query('SELECT * FROM events ORDER BY id');
         res.status(200).json(result.rows);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -102,7 +102,7 @@ app.delete('/api/event/:id', async (req, res) => {
         const { id } = req.params;
 
         const result = await pool.query(
-            'DELETE FROM event WHERE id=$1 RETURNING *', 
+            'DELETE FROM events WHERE id=$1 RETURNING *', 
             [id]
         );
 
